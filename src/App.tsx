@@ -8,6 +8,8 @@ import Communities from "./pages/Communities/Communities.tsx";
 import Lists from "./pages/Lists/Lists.tsx";
 import Messages from "./pages/Messages/Messages.tsx";
 import Bookmarks from "./pages/Bookmarks/Bookmarks.tsx";
+import Profile from "./pages/Profile/Profile.tsx";
+import Settings from "./pages/SettingsAndPrivacy/Settings.tsx";
 
 const App = (): JSX.Element => {
 
@@ -23,6 +25,8 @@ const App = (): JSX.Element => {
         <Route path="/lists" element={<Lists />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/bookmarks" element={<Bookmarks />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </>
   )
