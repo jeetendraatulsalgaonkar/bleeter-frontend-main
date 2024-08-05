@@ -1,0 +1,10 @@
+.logo {
+    height: 1.5em;
+    padding: 0em;
+}
+.logo:hover {
+    filter: drop-shadow(0 0 1em #ffffff);
+}
+.logo.react:hover {
+    filter: drop-shadow(0 0 1em #ffffff);
+}
