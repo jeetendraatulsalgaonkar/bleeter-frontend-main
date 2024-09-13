@@ -1,6 +1,6 @@
 import { CSSObject } from "@mui/system";
 import './NavigationDrawer.css';
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   CssBaseline, Divider, Grid,
@@ -12,7 +12,7 @@ import {
   Theme,
 } from "@mui/material";
 import MuiDrawer from '@mui/material/Drawer';
-import bleeterLogo from '../../assets/Bleeter_light.svg';
+import bleeterLogo from '@/assets/Bleeter_light.svg';
 import {
   Bookmarks,
   Explore,
@@ -21,12 +21,12 @@ import {
   Message, NotAccessible,
   Notifications, People, Person, Settings,
 } from "@mui/icons-material";
-import {
-  Link as RouterLink,
-  LinkProps as RouterLinkProps,
-} from 'react-router-dom';
+import ListItemLink from '../../components/ListItemLink/ListItemLink';
 
 const drawerWidth = 240;
+
+const PrimaryMenu: string[] = ['Home', 'Explore', 'Notifications', 'Messages', 'Lists', 'Bookmarks', 'Communities'];
+const UserMenu: string[] = ['Profile', 'Settings'];
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -102,37 +102,6 @@ const NavigationDrawer = (): JSX.Element => {
     }
   };
 
-  interface ListItemLinkProps {
-    icon?: React.ReactElement;
-    primary: string;
-    to: string;
-  }
-
-  const Link = React.forwardRef<HTMLAnchorElement, RouterLinkProps>(
-    function Link(itemProps, ref) {
-      return <RouterLink ref={ref} {...itemProps} role={undefined} />;
-    },
-  );
-
-  function ListItemLink(props: ListItemLinkProps) {
-    const { icon, primary, to } = props;
-
-    return (
-      <ListItemButton
-        component={Link}
-        to={to}
-        sx={{
-          minHeight: 48,
-          justifyContent: open ? 'initial' : 'center',
-          px: 2.5,
-        }}
-      >
-        {icon ? <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center' }}>{icon}</ListItemIcon> : null}
-        <ListItemText primary={primary} sx={{ opacity: open ? 1 : 0 }} />
-      </ListItemButton>
-    );
-  }
-
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -166,17 +135,17 @@ const NavigationDrawer = (): JSX.Element => {
               <ListItemText primary='bleeter' sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          {['Home', 'Explore', 'Notifications', 'Messages', 'Lists', 'Bookmarks', 'Communities'].map((text) => (
+          {PrimaryMenu.map((text: string) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemLink primary={text} to={`/${text.toLowerCase()}`} icon={getIconComponent(text)} />
+              <ListItemLink primary={text} to={`/${text.toLowerCase()}`} icon={getIconComponent(text)} open={open} />
             </ListItem>
           ))}
         </List>
         <Divider />
         <List>
-          {['Profile', 'Settings'].map((text) => (
+          {UserMenu.map((text: string) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemLink primary={text} to={`/${text.toLowerCase()}`} icon={getIconComponent(text)} />
+              <ListItemLink primary={text} to={`/${text.toLowerCase()}`} icon={getIconComponent(text)} open={open} />
             </ListItem>
           ))}
         </List>
